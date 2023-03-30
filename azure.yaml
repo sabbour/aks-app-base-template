@@ -7,8 +7,8 @@ infra:
     path: "infra"
     module: "main"
 services:
-    web:
-        project: ./src/web # path to your web project
+    app:
+        project: ./src/app # path to your app project
         dist: build # relative path to service deployment artifacts. The CLI will use files under this path to create the deployment artifact
         language: js  # one of the supported languages
         host: aks # deployment target
