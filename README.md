@@ -1,4 +1,4 @@
-## AKS app base template
+## Azure Kubernetes Service (AKS) app base template
 
 The template uses Bicep and the Azure Developer CLI (`azd`) to create the following infrastructure resources from the `infra` folder:
 - Azure Kubernetes Service cluster
