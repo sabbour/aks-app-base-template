@@ -1,4 +1,4 @@
-param grafanaPrincipalId string
+param principalId string
 param azureMonitorName string
 
 resource azureMonitor 'microsoft.monitor/accounts@2021-06-03-preview' existing = {
@@ -10,12 +10,12 @@ resource azureMonitorDataReaderRoleDefinition 'Microsoft.Authorization/roleDefin
   name: 'b0d8363b-8ddd-447d-831f-62ca05bff136'
 }
 
-resource aksAcrPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(resourceGroup().id, grafanaPrincipalId, azureMonitorDataReaderRoleDefinition.id)
+resource azureMonitorDataReaderRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(resourceGroup().id, principalId, azureMonitorDataReaderRoleDefinition.id)
   scope: azureMonitor
   properties: {
     roleDefinitionId: azureMonitorDataReaderRoleDefinition.id
-    principalId: grafanaPrincipalId
+    principalId: principalId
     principalType: 'ServicePrincipal' 
   }
 }

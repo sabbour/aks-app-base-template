@@ -169,10 +169,10 @@ resource prometheusDcr 'Microsoft.Insights/dataCollectionRules@2021-09-01-previe
 }
 
 // Assign Azure Monitor Data Reader role to Grafana
-module assignAzureMonitorDataReaderRole '../role-assignments/grafana-azuremonitor-role-assignment.bicep' = {
-  name: 'assignAzureMonitorDataReaderRole'
+module assignAzureMonitorDataReaderRoleToGrafana '../role-assignments/azuremonitor-role-assignment.bicep' = {
+  name: 'assignAzureMonitorDataReaderRoleToGrafana'
   params: {
-    grafanaPrincipalId: grafana.identity.principalId
+    principalId: grafana.identity.principalId
     azureMonitorName: azureMonitorName
   }
   dependsOn: [
@@ -354,5 +354,7 @@ output azureMonitorWorkspaceId string = azureMonitor.id
 output azureMonitorWorkspaceName string = azureMonitorName
 output grafanaId string = grafana.id
 output grafanaName string = azureManagedGrafanaName
+output grafanaDashboard string = grafana.properties.endpoint
 output prometheusDcrId string = prometheusDcr.id
+output prometheusEndpoint string = azureMonitor.properties.metrics.prometheusQueryEndpoint
 output containerInsightsDcrId string = containerInsightsDcr.id

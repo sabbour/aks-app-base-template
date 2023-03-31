@@ -98,7 +98,15 @@ module ruleAssociations 'monitoring/rule-associations.bicep' = {
 
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
+output AZURE_SUBSCRIPTION_ID string = subscription().subscriptionId
 output AZURE_AKS_CLUSTER_NAME string = aks.outputs.name
-output AZURE_AKS_IDENTITY_CLIENT_ID string = aks.outputs.identity.clientId
+output AZURE_AKS_CLUSTER_RESOURCE_GROUP string = resourceGroup.name
+output AZURE_AKS_IDENTITY_CLIENT_ID string = aks.outputs.identity.principalId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = acr.outputs.loginServer
 output AZURE_CONTAINER_REGISTRY_NAME string = acr.outputs.name
+output AZURE_MANAGED_PROMETHEUS_ENDPOINT string = monitoring.outputs.prometheusEndpoint
+output AZURE_MANAGED_GRAFANA_ENDPOINT string = monitoring.outputs.grafanaDashboard
+output AZURE_MANAGED_PROMETHEUS_RESOURCE_ID string = monitoring.outputs.azureMonitorWorkspaceId
+output AZURE_MANAGED_GRAFANA_RESOURCE_ID string = monitoring.outputs.grafanaId
+output AZURE_MANAGED_GRAFANA_NAME string = monitoring.outputs.grafanaName
+

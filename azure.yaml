@@ -2,15 +2,19 @@
 name: nodejs-aks-app-template
 metadata:
     template: nodejs-web-aks-template@0.0.1-beta
+hooks:
+    preprovision:
+        run: infra/azd-hooks/preprovision.sh # registers any required features on the subscription
+    postprovision:
+        run: infra/azd-hooks/postprovision.sh # installs additional components on the cluster
 infra:
-    provider: "bicep"
-    path: "infra"
-    module: "main"
+    provider: bicep
+    path: infra
+    module: main
 services:
     app:
-        project: ./src/app # path to your app project
-        dist: build # relative path to service deployment artifacts. The CLI will use files under this path to create the deployment artifact
-        language: js  # one of the supported languages
+        project: ./src/app/code # path to your app project
+        language: js
         host: aks # deployment target
 pipeline:
-    provider: "github"
+    provider: github
