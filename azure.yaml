@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-name: nodejs-aks-app-template
+name: aks-app-template
 metadata:
-    template: nodejs-web-aks-template@0.0.1-beta
+    template: aks-app-template@0.0.1-beta
 hooks:
     preprovision:
         run: infra/azd-hooks/preprovision.sh # registers any required features on the subscription
@@ -13,8 +13,8 @@ infra:
     module: main
 services:
     app:
-        project: ./src/app/code # path to your app project
-        language: js
+        project: ./src/app-placeholder/code # path to your app project
+        language: js # ignored for aks
         host: aks # deployment target
 pipeline:
     provider: github
