@@ -83,6 +83,7 @@ module monitoring './monitoring/monitoring.bicep' = {
   }
 }
 
+// Azure Monitor rule association with the AKS cluster to enable the portal experience
 module ruleAssociations 'monitoring/rule-associations.bicep' = {
   name: 'monitoring-rules-associations'
   scope: resourceGroup
@@ -94,6 +95,29 @@ module ruleAssociations 'monitoring/rule-associations.bicep' = {
   dependsOn: [
     monitoring
   ]
+}
+
+// Managed identity for KEDA
+module kedaManagedIdentity 'managed-identity/keda-workload-identity.bicep' = {
+  name: 'keda-managed-identity'
+  scope: resourceGroup
+  params: {
+    managedIdentityName:  '${abbrs.managedIdentityUserAssignedIdentities}${resourceToken}-keda'
+    federatedIdentityName:  '${abbrs.federatedIdentityCredentials}${resourceToken}-keda'
+    aksOidcIssuer: aks.outputs.aksOidcIssuer
+    location: location
+    tags: tags
+  }
+}
+
+// Assign Azure Monitor Data Reader role to the KEDA managed identity
+module assignAzureMonitorDataReaderRoleToKEDA 'role-assignments/azuremonitor-role-assignment.bicep' = {
+  name: 'assignAzureMonitorDataReaderRoleToKEDA'
+  scope: resourceGroup
+  params: {
+    principalId: kedaManagedIdentity.outputs.managedIdentityClientId
+    azureMonitorName: monitoring.outputs.azureMonitorWorkspaceName
+  }
 }
 
 output AZURE_LOCATION string = location
@@ -109,4 +133,5 @@ output AZURE_MANAGED_GRAFANA_ENDPOINT string = monitoring.outputs.grafanaDashboa
 output AZURE_MANAGED_PROMETHEUS_RESOURCE_ID string = monitoring.outputs.azureMonitorWorkspaceId
 output AZURE_MANAGED_GRAFANA_RESOURCE_ID string = monitoring.outputs.grafanaId
 output AZURE_MANAGED_GRAFANA_NAME string = monitoring.outputs.grafanaName
+output KEDA_WORKLOADIDENTITY_ID string = kedaManagedIdentity.outputs.managedIdentityClientId
 

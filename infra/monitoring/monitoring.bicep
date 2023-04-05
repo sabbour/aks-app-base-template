@@ -244,7 +244,7 @@ resource nodeRecordingRuleGroup 'Microsoft.AlertsManagement/prometheusRuleGroups
 
 // Prometheus Kubernetes rule group
 resource kubernetesRecordingRuleGroup 'Microsoft.AlertsManagement/prometheusRuleGroups@2021-07-22-preview' = {
-  name: 'KubernetesReccordingRulesRuleGroup-${clusterName}'
+  name: 'KubernetesReccrdingRulesRuleGroup-${clusterName}'
   location: azureMonitorWorkspaceLocation
   tags: tags
   properties: {

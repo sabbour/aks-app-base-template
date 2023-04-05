@@ -42,16 +42,16 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
     dnsPrefix: '${name}-dns'
     kubernetesVersion: kubernetesVersion
     enableRBAC: false
-    /*workloadAutoScalerProfile: {
+    workloadAutoScalerProfile: {
       keda: {
-        enabled: true
+        enabled: false // Will resort to installing the Helm chart for 2.10 until the add-on is updated
       }
       verticalPodAutoscaler: {
         enabled: true
         controlledValues: 'RequestsAndLimits'
         updateMode: 'Off' // The UpdateMode of vertical Pod Autoscaler can't be changed in preview
       }
-    }*/
+    }
     /*
     ingressProfile: {
       webAppRouting: {
@@ -101,7 +101,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
     ]/*/
     apiServerAccessProfile: {
       enablePrivateCluster: false
-      enableVnetIntegration: false
+      enableVnetIntegration: true
     }*/
     azureMonitorProfile: {
       metrics: {
@@ -173,3 +173,4 @@ module prometheusConfig '../monitoring/prometheus-config.bicep' = {
 
 output identity object = aks.identity
 output name string = aks.name
+output aksOidcIssuer string = aks.properties.oidcIssuerProfile.issuerUrl

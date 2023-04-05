@@ -43,6 +43,7 @@
     "eventGridEventSubscriptions": "evgs-",
     "eventHubNamespaces": "evhns-",
     "eventHubNamespacesEventHubs": "evh-",
+    "federatedIdentityCredentials": "fic-",
     "grafanaWorkspace": "gpd-",
     "hdInsightClustersHadoop": "hadoop-",
     "hdInsightClustersHbase": "hbase-",
