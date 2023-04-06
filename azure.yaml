@@ -12,9 +12,11 @@ infra:
     path: infra
     module: main
 services:
-    app:
+    app-placeholder:
         project: ./src/app-placeholder/code # path to your app project
-        language: js # ignored for aks
+        language: js
         host: aks # deployment target
+        k8s:
+          deploymentPath: ../manifests
 pipeline:
     provider: github

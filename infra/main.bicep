@@ -58,13 +58,9 @@ module containerRegistryAccess './role-assignments/aks-acr-role-assignment.bicep
   name: 'cluster-container-registry-access'
   scope: resourceGroup
   params: {
-    aksPrincipalId: aks.outputs.identity.principalId
+    aksPrincipalId: aks.outputs.identity.objectId
     acrName: acr.outputs.name
   }
-  dependsOn: [
-    aks
-    acr
-  ]
 }
 
 // Monitor application with Azure Monitor

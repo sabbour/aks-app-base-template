@@ -8,7 +8,7 @@ param tags object = {}
 @description('The workspace id of the connected log analytics workspace')
 param logAnalyticsId string = ''
 
-/*
+
 var aksDiagCategories = [
   'cluster-autoscaler'
   'kube-controller-manager'
@@ -33,7 +33,6 @@ resource diagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' 
     ]
   }
 }
-*/
 
 resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
   location: location
