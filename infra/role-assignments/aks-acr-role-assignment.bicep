@@ -1,5 +1,6 @@
 param aksPrincipalId string
 param acrName string
+param desc string = ''
 
 resource acr 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
   name: acrName
@@ -17,5 +18,6 @@ resource aksAcrPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-
     roleDefinitionId: acrPullRoleDefinition.id
     principalId: aksPrincipalId
     principalType: 'ServicePrincipal' 
+    description: desc
   }
 }

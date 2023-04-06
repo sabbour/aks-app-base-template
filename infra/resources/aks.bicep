@@ -40,7 +40,11 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
   properties: {
     dnsPrefix: '${name}-dns'
     kubernetesVersion: kubernetesVersion
-    enableRBAC: false
+    enableRBAC: true
+    aadProfile: {
+      enableAzureRBAC: false
+      managed: false
+    }
     workloadAutoScalerProfile: {
       keda: {
         enabled: false // Will resort to installing the Helm chart for 2.10 until the add-on is updated
@@ -77,7 +81,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
         nodeTaints: []
         enableNodePublicIP: false
         tags: tags
-      }/*
+      }
       {
         name: 'workerpool'
         osDiskSizeGB: 0 // default size
@@ -96,12 +100,12 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
         nodeTaints: []
         enableNodePublicIP: false
         tags: tags
-      }*/
-    ]/*/
+      }
+    ]
     apiServerAccessProfile: {
       enablePrivateCluster: false
       enableVnetIntegration: true
-    }*/
+    }
     azureMonitorProfile: {
       metrics: {
         enabled: true

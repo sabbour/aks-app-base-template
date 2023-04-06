@@ -1,5 +1,6 @@
 param principalId string
 param azureMonitorName string
+param desc string = ''
 
 resource azureMonitor 'microsoft.monitor/accounts@2021-06-03-preview' existing = {
   name: azureMonitorName
@@ -17,5 +18,6 @@ resource azureMonitorDataReaderRoleAssignment 'Microsoft.Authorization/roleAssig
     roleDefinitionId: azureMonitorDataReaderRoleDefinition.id
     principalId: principalId
     principalType: 'ServicePrincipal' 
+    description: desc
   }
 }

@@ -26,4 +26,6 @@ resource kedaFederatedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities
   }
 }
 
+output managedIdentityPrincipalId string = kedaManagedIdentity.properties.principalId
 output managedIdentityClientId string = kedaManagedIdentity.properties.clientId
+

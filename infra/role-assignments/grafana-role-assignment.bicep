@@ -1,5 +1,6 @@
 param principalId string
 param grafanaName string
+param desc string = ''
 
 resource grafana 'Microsoft.Dashboard/grafana@2022-08-01' existing = {
   name: grafanaName
@@ -17,5 +18,6 @@ resource grafanaAdminRoleAssignment 'Microsoft.Authorization/roleAssignments@202
     roleDefinitionId: grafanaAdminRoleDefinition.id
     principalId: principalId
     principalType: 'ServicePrincipal' 
+    description: desc
   }
 }
