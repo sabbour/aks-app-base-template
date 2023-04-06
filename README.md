@@ -16,12 +16,8 @@ The template uses Bicep and the Azure Developer CLI (`azd`) to create the follow
 - Initialize the template on your machine using `azd init -t <your fork's git repo>`
 - Deploy the infrastructure using `azd provision`
 - Add your source code to `src/app-placeholder/code`. You can use the sample code at <https://github.com/sabbour/todo-sample> *(defunct: to be created)*
-- Add your Kubernetes manifests to `src/app/manifests`. You can use the Visual Studio Code AKS developer extension to generate the manifests.
+- Add your Kubernetes manifests to `src/app-placeholder/manifests`. You can use the Visual Studio Code AKS developer extension to generate the manifests.
 - Add a GitHub Actions workflow to the `.github` folder. You can use the Visual Studio Code AKS developer extension to generate the workflow.
 - Configure GitHub Actions authentication using `azd pipeline config`
 - Add all files to your commit with `git add .`
 - Commit and push your changes then watch the build pipeline `git commit -m "Changes" && git push`
-
-TODO:
-- Use azd deploy to automate building, pushing, and updating the container images
-- Test the KEDA-Prometheus authentication
