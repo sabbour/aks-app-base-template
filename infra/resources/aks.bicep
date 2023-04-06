@@ -170,6 +170,11 @@ module prometheusConfig '../monitoring/prometheus-config.bicep' = {
   }
 }
 
-output identity object = aks.identity
+@description('The AKS cluster identity')
+output clusterIdentity object = {
+  clientId: aks.properties.identityProfile.kubeletidentity.clientId
+  objectId: aks.properties.identityProfile.kubeletidentity.objectId
+  resourceId: aks.properties.identityProfile.kubeletidentity.resourceId
+}
 output name string = aks.name
 output aksOidcIssuer string = aks.properties.oidcIssuerProfile.issuerUrl

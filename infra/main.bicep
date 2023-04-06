@@ -58,7 +58,7 @@ module containerRegistryAccess './role-assignments/aks-acr-role-assignment.bicep
   name: 'cluster-container-registry-access'
   scope: resourceGroup
   params: {
-    aksPrincipalId: aks.outputs.identity.objectId
+    aksPrincipalId: aks.outputs.clusterIdentity.objectId
     acrName: acr.outputs.name
   }
 }
@@ -121,7 +121,8 @@ output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_SUBSCRIPTION_ID string = subscription().subscriptionId
 output AZURE_AKS_CLUSTER_NAME string = aks.outputs.name
 output AZURE_AKS_CLUSTER_RESOURCE_GROUP string = resourceGroup.name
-output AZURE_AKS_IDENTITY_CLIENT_ID string = aks.outputs.identity.principalId
+output AZURE_AKS_CLUSTERIDENTITY_OBJECT_ID string = aks.outputs.clusterIdentity.objectId
+output AZURE_AKS_CLUSTERIDENTITY_CLIENT_ID string = aks.outputs.clusterIdentity.clientId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = acr.outputs.loginServer
 output AZURE_CONTAINER_REGISTRY_NAME string = acr.outputs.name
 output AZURE_MANAGED_PROMETHEUS_ENDPOINT string = monitoring.outputs.prometheusEndpoint
@@ -130,4 +131,5 @@ output AZURE_MANAGED_PROMETHEUS_RESOURCE_ID string = monitoring.outputs.azureMon
 output AZURE_MANAGED_GRAFANA_RESOURCE_ID string = monitoring.outputs.grafanaId
 output AZURE_MANAGED_GRAFANA_NAME string = monitoring.outputs.grafanaName
 output KEDA_WORKLOADIDENTITY_ID string = kedaManagedIdentity.outputs.managedIdentityClientId
+output PROMETHEUS_ENDPOINT string = monitoring.outputs.prometheusEndpoint
 
