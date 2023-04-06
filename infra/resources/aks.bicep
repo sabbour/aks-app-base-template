@@ -41,10 +41,6 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
     dnsPrefix: '${name}-dns'
     kubernetesVersion: kubernetesVersion
     enableRBAC: true
-    aadProfile: {
-      enableAzureRBAC: false
-      managed: false
-    }
     workloadAutoScalerProfile: {
       keda: {
         enabled: false // Will resort to installing the Helm chart for 2.10 until the add-on is updated

@@ -145,6 +145,7 @@ output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_SUBSCRIPTION_ID string = subscription().subscriptionId
 output AZURE_AKS_CLUSTER_NAME string = aks.outputs.name
+output AZURE_RESOURCE_GROUP string = resourceGroup.name
 output AZURE_AKS_CLUSTERIDENTITY_OBJECT_ID string = aks.outputs.clusterIdentity.objectId
 output AZURE_AKS_CLUSTERIDENTITY_CLIENT_ID string = aks.outputs.clusterIdentity.clientId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = acr.outputs.loginServer
